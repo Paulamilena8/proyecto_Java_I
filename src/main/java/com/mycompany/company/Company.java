@@ -6,14 +6,14 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
+
 public class Company {
     
      public static void main(String[] args) {
         
-       // LoginFrame login = new LoginFrame();
+       LoginFrame inicio = new LoginFrame();
+            inicio.setVisible(true);
          
-         
-        new FormularioActualizarSuministros();
     }
   
 }

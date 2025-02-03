@@ -1,10 +1,17 @@
 
 package com.mycompany.company;
 
+import com.mycompany.company.conectarDB.conectarBaseDeDatos;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 
 public class LoginFrame extends javax.swing.JFrame {
-
- 
+    private Connection conexion;
+    
     public LoginFrame() {
         initComponents();
     }
@@ -19,97 +26,95 @@ public class LoginFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        imagengrande = new javax.swing.JLabel();
+        textocredenciales = new javax.swing.JLabel();
+        txtidempleados = new javax.swing.JTextField();
+        textoconstrasena = new javax.swing.JLabel();
+        txtcontrasena = new javax.swing.JTextField();
+        checkbxusuario = new javax.swing.JCheckBox();
+        btnlogin = new javax.swing.JButton();
+        btnolvido = new javax.swing.JButton();
+        txtemplado = new javax.swing.JLabel();
+        textlogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/222.jpg"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 720));
+        imagengrande.setIcon(new javax.swing.ImageIcon("C:\\Users\\paula\\Documents\\NetBeansProjects\\company\\src\\main\\java\\img\\monstera peque.jpg")); // NOI18N
+        imagengrande.setText("jLabel1");
+        jPanel1.add(imagengrande, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 610));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 21.png"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 0, 150, 160));
+        textocredenciales.setFont(new java.awt.Font("Lucida Console", 0, 18)); // NOI18N
+        textocredenciales.setForeground(new java.awt.Color(102, 102, 102));
+        textocredenciales.setText("Introduce tus credenciales");
+        jPanel1.add(textocredenciales, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 300, 20));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 20.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 590, 150, 130));
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Group 15.png"))); // NOI18N
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 150, 310, 120));
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("ID de Empleado");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 300, 160, -1));
-
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Ingresa tu ID de Empleado");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txtidempleados.setForeground(new java.awt.Color(0, 51, 0));
+        txtidempleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txtidempleadosActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 340, 330, 40));
+        jPanel1.add(txtidempleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 230, 310, 40));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Contraseña");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 400, 110, -1));
+        textoconstrasena.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textoconstrasena.setForeground(new java.awt.Color(102, 102, 102));
+        textoconstrasena.setText("Contraseña");
+        jPanel1.add(textoconstrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 290, 170, 30));
 
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingresa tu contraseña");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtcontrasena.setForeground(new java.awt.Color(51, 51, 0));
+        txtcontrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtcontrasenaActionPerformed(evt);
             }
         });
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 330, 40));
+        jPanel1.add(txtcontrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 310, 40));
 
-        jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(102, 102, 102));
-        jCheckBox1.setText("Recordar Usuario");
-        jCheckBox1.setBorder(null);
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        checkbxusuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        checkbxusuario.setForeground(new java.awt.Color(102, 102, 102));
+        checkbxusuario.setText("Recordar Usuario");
+        checkbxusuario.setBorder(null);
+        checkbxusuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                checkbxusuarioActionPerformed(evt);
             }
         });
-        jPanel1.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 490, 160, 30));
+        jPanel1.add(checkbxusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 380, 140, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Login");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnlogin.setBackground(new java.awt.Color(0, 153, 51));
+        btnlogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnlogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnlogin.setText("Login");
+        btnlogin.setBorder(null);
+        btnlogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnloginActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 530, 330, 30));
+        jPanel1.add(btnlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 310, 30));
 
-        jButton2.setForeground(new java.awt.Color(153, 153, 153));
-        jButton2.setText("¿Olvidaste tu contraseña?");
-        jButton2.setBorder(null);
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 580, 200, 30));
+        btnolvido.setForeground(new java.awt.Color(153, 153, 153));
+        btnolvido.setText("¿Olvidaste tu contraseña?");
+        btnolvido.setBorder(null);
+        jPanel1.add(btnolvido, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 180, 30));
+
+        txtemplado.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtemplado.setForeground(new java.awt.Color(102, 102, 102));
+        txtemplado.setText("ID de Empleado");
+        jPanel1.add(txtemplado, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 190, 140, 30));
+
+        textlogin.setFont(new java.awt.Font("Lucida Console", 0, 36)); // NOI18N
+        textlogin.setForeground(new java.awt.Color(102, 102, 102));
+        textlogin.setText("Login");
+        jPanel1.add(textlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 80, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1051, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,71 +123,85 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private void txtidempleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidempleadosActionPerformed
+        // ID DE EMPLEADO TEXT FIELD
+       
+        
+         
+    }//GEN-LAST:event_txtidempleadosActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void checkbxusuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkbxusuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_checkbxusuarioActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
+        // LOGIN button
+        String id_empleado = txtidempleados.getText();
+        String contrasena= txtcontrasena.getText();
+        if (id_empleado.isEmpty()||contrasena.isEmpty()){
+          JOptionPane.showMessageDialog(this, "Por favor complete todos los campos.");  
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
+        
+        else{
+            if (checkDB(id_empleado)){
+            JOptionPane.showMessageDialog(this, "Empleado en base de datos");
+            Inicio nuevo = new Inicio(); 
+            nuevo.setVisible(true);
+            this.dispose();
             }
-        });
-    }
+            else{
+            JOptionPane.showMessageDialog(this, "Empleado no está en la base de datos");
+            }
+        } 
+        
+    }//GEN-LAST:event_btnloginActionPerformed
 
+    private void txtcontrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontrasenaActionPerformed
+
+    }//GEN-LAST:event_txtcontrasenaActionPerformed
+    
+    
+    
+    public boolean checkDB(String id_empleado){
+        
+        try{
+       conexion= conectarBaseDeDatos.conectarBaseDeDatos();
+        
+        
+        String query = "SELECT EMPLEADOS_ID FROM EMPLEADOS WHERE EMPLEADOS_ID = ?" ;   
+        PreparedStatement pst = conexion.prepareStatement(query);
+        pst.setInt(1, Integer.parseInt(id_empleado));
+
+        ResultSet rs = pst.executeQuery();
+        
+        // Verificar si hay resultados
+        if (rs.next()) {
+            return true;  // El empleado existe en la base de datos
+        } else {
+            return false;  // El empleado no existe
+        }
+    } catch (SQLException e) {
+        // Manejo de errores
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
+        e.printStackTrace();
+        return false;
+    }
+}
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JButton btnlogin;
+    private javax.swing.JButton btnolvido;
+    private javax.swing.JCheckBox checkbxusuario;
+    private javax.swing.JLabel imagengrande;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel textlogin;
+    private javax.swing.JLabel textoconstrasena;
+    private javax.swing.JLabel textocredenciales;
+    private javax.swing.JTextField txtcontrasena;
+    private javax.swing.JLabel txtemplado;
+    private javax.swing.JTextField txtidempleados;
     // End of variables declaration//GEN-END:variables
 
 
